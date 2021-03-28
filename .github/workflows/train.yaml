@@ -15,11 +15,12 @@ jobs:
           pip install -r requirements.txt
           dvc repro
           
-          git fetch --prune
+          git fetch --pull
+          
           dvc metrics diff --show-md master > report.md
           
-          # Add an image to the report
-          echo "## ROC Graph for the classifiers"
+          #Add and image to the report
+          echo "## ROC Graph for classifier"
           cml-publish ROC.png --md >> report.md
           
           cml-send-comment report.md
