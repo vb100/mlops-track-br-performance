@@ -30,7 +30,7 @@ z_scaled = min_max_scaler.fit_transform(z)
 x = pd.DataFrame(z_scaled)
 
 # Split dataset into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.11, random_state = 88)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.44, random_state = 8438)
 
 # - - - - APPLY CLASSIFIERS -->
 # ::: Apply Dummy Classifier
@@ -39,8 +39,7 @@ dummyModel.fit(X_train, y_train)
 predictionsDummy = dummyModel.predict(X_test)
 
 accuracyDummy = metrics.accuracy_score(y_test, predictionsDummy)       # One of the results
-
-
+7
 # ::: Apply KNN
 def chooseKNN():
     maxi = 1 #saving the index of the highest score
