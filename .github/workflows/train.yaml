@@ -1,4 +1,4 @@
-name: your-workflow-name
+name: farmers
 on: [push]
 jobs:
   run:
@@ -6,21 +6,17 @@ jobs:
     container: docker://dvcorg/cml-py3:latest
     steps:
       - uses: actions/checkout@v2
-      - name: 'Train my model'
+      - name: cml_run
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-
-          # Your ML workflow goes here
           pip install -r requirements.txt
-          dvc repro
-          
+          dvc repro 
+
           git fetch --prune
-          
           dvc metrics diff --show-md master > report.md
-          
-          #Add and image to the report
-          echo "## ROC Graph for classifier"
+
+          # Add figure to the report
+          echo "## Validating results by region"
           cml-publish ROC.png --md >> report.md
-          
           cml-send-comment report.md
